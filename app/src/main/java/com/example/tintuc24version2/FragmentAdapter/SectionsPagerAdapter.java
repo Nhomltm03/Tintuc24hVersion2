@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.tintuc24version2.NextDayWeatherFragment;
 import com.example.tintuc24version2.R;
-import com.example.tintuc24version2.TodayWeatherFragment;
 import com.example.tintuc24version2.WeatherFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
