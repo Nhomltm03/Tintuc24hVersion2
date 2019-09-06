@@ -1,6 +1,5 @@
 package com.example.tintuc24version2.WeatherModels;
 
-import com.example.tintuc24version2.Models.Source;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -55,9 +54,12 @@ public class WeatherResult {
     @Expose
     private  String name;
 
-    @SerializedName("cos")
+    @SerializedName("cod")
     @Expose
     private  int cod;
+
+    public WeatherResult() {
+    }
 
     public Coord getCoord() {
         return coord;

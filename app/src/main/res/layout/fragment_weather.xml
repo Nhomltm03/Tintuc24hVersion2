@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,44 +9,47 @@
     android:id="@+id/weatherFragment"
     tools:context=".WeatherFragment">
 
-
     <TextView
         android:id="@+id/tv_Temp"
-        android:layout_width="261dp"
-        android:layout_height="158dp"
-        android:layout_marginTop="168dp"
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:layout_marginTop="164dp"
         android:fontFamily="sans-serif-thin"
         android:gravity="center|center_horizontal"
         android:text="29°C"
         android:textColor="#fff"
         android:textSize="100sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_Status"
-        android:layout_width="205dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="108dp"
         android:gravity="center|center_horizontal"
         android:text="Rain"
         android:textColor="#fff"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_City"
-        android:layout_width="203dp"
-        android:layout_height="86dp"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginTop="56dp"
         android:gravity="center|center_horizontal"
         android:text="HANOI-VN"
         android:textColor="#fff"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,13 +57,34 @@
         android:id="@+id/btn_Detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="152dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/transparent_bg"
         android:text="Detail"
         android:textColor="#fff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_search"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="340dp"
+        android:background="@drawable/transparent_bg"
+        android:ems="10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="416dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

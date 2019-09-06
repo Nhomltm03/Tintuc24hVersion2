@@ -5,13 +5,8 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +19,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.widget.SearchView;
 import com.example.tintuc24version2.Models.Article;
@@ -33,7 +27,6 @@ import com.example.tintuc24version2.NewsApdapter.NewsAdapter;
 import com.example.tintuc24version2.NewsApdapter.OnItemClickListener;
 import com.example.tintuc24version2.api.ApiClient;
 import com.example.tintuc24version2.api.ApiInterface;
-import com.flaviofaria.kenburnsview.KenBurnsView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,11 +123,7 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
         });
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -196,6 +185,12 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
 
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
 }
