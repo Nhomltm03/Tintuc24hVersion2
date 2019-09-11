@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.example.tintuc24version2.FragmentAdapter.SectionsPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -12,26 +14,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends AppCompatActivity {
+      ViewPager viewPager;
+      WeatherFragment weatherFragment;
+      NewsFragment newsFragment;
+      MenuItem prevMenuItem;
 
-    private  NewsFragment fragment = new NewsFragment();
-    SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            FragmentManager manager = getSupportFragmentManager();
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    NewsFragment newsFragment = new NewsFragment();
-                    manager.beginTransaction().replace(R.id.container, newsFragment, newsFragment.getTag()).commit();
-                    return true;
+                    viewPager.setCurrentItem(0);
+                    break;
+
                 case R.id.navigation_dashboard:
-                    WeatherFragment weatherFragment = new WeatherFragment();
-                    manager.beginTransaction().replace(R.id.container, weatherFragment, weatherFragment.getTag()).commit();
-                    return true;
+                    viewPager.setCurrentItem(1);
+                    break;
             }
             return false;
         }
@@ -41,21 +48,55 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadFragment(fragment);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        final BottomNavigationView navView = findViewById(R.id.nav_view);
+        viewPager = (ViewPager) findViewById(R.id.viewPagerMain);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                if(prevMenuItem !=null){
+                    prevMenuItem.setChecked(false);
+                } else {
+                    navView.getMenu().getItem(0).setChecked(false);
+
+                }
+                navView.getMenu().getItem(position).setChecked(true);
+                prevMenuItem = navView.getMenu().getItem(position);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+
+        });
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                return true;
+            }
+        });
+
+        setupViewPager(viewPager);
     }
 
-    private boolean loadFragment(Fragment fragment) {
-        //switching fragment
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .commit();
-            return true;
-        }
-        return false;
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        newsFragment=new NewsFragment();
+        weatherFragment=new WeatherFragment();
+        adapter.addFragment(newsFragment);
+        adapter.addFragment(weatherFragment);
+        viewPager.setAdapter(adapter);
     }
+
 
 }

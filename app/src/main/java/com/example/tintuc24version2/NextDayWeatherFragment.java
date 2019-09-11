@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,7 +17,8 @@ import android.view.ViewGroup;
  */
 public class NextDayWeatherFragment extends Fragment {
 
-
+public static  final String URL =
+        "http://api.openweathermap.org/data/2.5/forecast?q=hanoi&units=metric&cnt=4&appid=27a77fcad68bf8df89e0124c586f0d30";
     public NextDayWeatherFragment() {
         // Required empty public constructor
     }
@@ -27,5 +30,6 @@ public class NextDayWeatherFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_next_day_weather, container, false);
     }
+
 
 }

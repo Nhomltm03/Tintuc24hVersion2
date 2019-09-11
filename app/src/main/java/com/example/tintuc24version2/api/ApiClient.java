@@ -15,12 +15,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final  String BASE_URL ="http://newsapi.org/v2/";
+    public static final  String BASE_URL_NEWS ="http://newsapi.org/v2/";
     public  static  Retrofit retrofit;
     public static Retrofit getApitClient(){
 
         if(retrofit == null){
-            retrofit = new  Retrofit.Builder().baseUrl(BASE_URL)
+            retrofit = new  Retrofit.Builder().baseUrl(BASE_URL_NEWS)
                     .client(getUnsafeOKHttpClient().build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

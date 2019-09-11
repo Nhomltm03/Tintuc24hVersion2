@@ -8,47 +8,47 @@ import java.util.List;
 public class WeatherResult {
     @SerializedName("coord")
     @Expose
-    private Coord coord;
+    public Coord coord;
 
     @SerializedName("weather")
     @Expose
-    private List<Weather> weather;
+    public List<Weather> weather;
 
     @SerializedName("base")
     @Expose
-    private  String base;
+    public   String base;
 
     @SerializedName("main")
     @Expose
-    private  Main main;
+    public   Main main;
 
     @SerializedName("visibility")
     @Expose
-    private  int visibility;
+    public   int visibility;
 
     @SerializedName("wind")
     @Expose
-    private  Wind wind;
+    public   Wind wind;
 
     @SerializedName("clouds")
     @Expose
-    private  Cloud cloud;
+    public   Cloud cloud;
 
     @SerializedName("dt")
     @Expose
-    private  int dt;
+    public   int dt;
 
     @SerializedName("sys")
     @Expose
-    private  Sys sys;
+    public   Sys sys;
 
     @SerializedName("timezone")
     @Expose
-    private  int  timezone;
+    public   int  timezone;
 
     @SerializedName("id")
     @Expose
-    private  int id;
+    public   int id;
 
     @SerializedName("name")
     @Expose
@@ -56,7 +56,7 @@ public class WeatherResult {
 
     @SerializedName("cod")
     @Expose
-    private  int cod;
+    public   int cod;
 
     public WeatherResult() {
     }

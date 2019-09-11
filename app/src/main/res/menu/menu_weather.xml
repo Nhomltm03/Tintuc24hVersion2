@@ -11,5 +11,11 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
 
+    <item android:id="@+id/action_setting_weather"
+        android:icon="@drawable/more_icon"
+        android:orderInCategory="100"
+        android:title="Setting"
+        app:showAsAction="always"/>
+
 
 </menu>

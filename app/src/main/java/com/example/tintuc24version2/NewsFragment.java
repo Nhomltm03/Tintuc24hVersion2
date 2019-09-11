@@ -92,7 +92,9 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
         if(keyword.length() > 0){
             call = apiInterface.getNewsSearch(keyword, language ,"publishedAt", API_KEY);
         } else {
-            call = apiInterface.getNews(country,API_KEY);
+            call = apiInterface.getNews("us",API_KEY); // because some country code Api have no result
+
+            // set default country us
         }
 
         call.enqueue(new Callback<News>() {
@@ -103,7 +105,7 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
                         articles.clear();
                     }
                     articles = response.body().getAritcle();
-                    newsAdapter = new NewsAdapter(articles, getActivity().getBaseContext());
+                    newsAdapter = new NewsAdapter(articles, getActivity());
                     recyclerView.setAdapter(newsAdapter);
                     newsAdapter.notifyDataSetChanged();
                     initListener();

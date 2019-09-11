@@ -15,12 +15,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherApiClient {
 
-    public static final  String BASE_URL ="http://api.openweathermap.org/data/2.5/";
+    public static final  String BASE_URL_WEATHER ="http://api.openweathermap.org/data/2.5/";
     public  static Retrofit retrofit;
     public static Retrofit getApitClient(){
 
         if(retrofit == null){
-            retrofit = new  Retrofit.Builder().baseUrl(BASE_URL)
+            retrofit = new  Retrofit.Builder().baseUrl(BASE_URL_WEATHER)
                     .client(getUnsafeOKHttpClient().build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

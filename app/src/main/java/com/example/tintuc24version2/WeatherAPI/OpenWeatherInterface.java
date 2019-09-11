@@ -14,4 +14,13 @@ public interface OpenWeatherInterface {
             @Query("units") String unit,
             @Query("appid") String apiKey
     );
+
+    @GET("forecast")
+    Call<WeatherResult> getWeatherForecas(
+            @Query("q") String cityName,
+            @Query("units") String unit,
+            @Query("cnt") String cnt,
+            @Query("appid") String apiKey
+    );
+
 }
