@@ -7,24 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.tintuc24version2.R;
-import com.example.tintuc24version2.Utils;
-import com.example.tintuc24version2.WeatherModels.WeatherForecaseResult;
+import com.example.tintuc24version2.WeatherModels.WeatherData;
 import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
 
 
 public class WeatherPageAdapter extends RecyclerView.Adapter<WeatherPageAdapter.WeatherViewHolder> {
 
     private Context context;
-    private WeatherForecaseResult weatherForecaseResult;
+    private ArrayList<WeatherData> weatherDataList;
 
-    public WeatherPageAdapter(Context context, WeatherForecaseResult weatherForecaseResult) {
+    public WeatherPageAdapter(Context context, ArrayList<WeatherData> weatherDataList) {
         this.context = context;
-        this.weatherForecaseResult = weatherForecaseResult;
+        this.weatherDataList = weatherDataList;
     }
 
     @NonNull
@@ -39,41 +37,38 @@ public class WeatherPageAdapter extends RecyclerView.Adapter<WeatherPageAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull WeatherViewHolder holder, int position) {
-        Picasso.with(context).load(new StringBuilder("http://openweathermap.org/img/wn/").append(weatherForecaseResult.list.get(position)
-                .weather.get(0).getIcon()).append("@2x.png").toString()).into(holder.iconWeather);
-        holder.txt_detailStatus.setText(new StringBuffer(weatherForecaseResult.list.get(position).weather.get(0).getDescription()));
-
-        holder.txt_detailCityName.setText(new StringBuffer(weatherForecaseResult.getCity().getName()).
-                append(", ").append(weatherForecaseResult.getCity().getCountry()));
-        holder.txt_detailTime.setText(weatherForecaseResult.list.get(position).dt_txt);
-
-        holder.txtSunset.setText(Utils.DateToTimeFormat(weatherForecaseResult.getCity().getSunset()+""));
-        holder.txtSunrise.setText(Utils.DateToTimeFormat(weatherForecaseResult.getCity().getSunrise()+""));
-
+        Picasso.get().load(new StringBuilder("http://openweathermap.org/img/wn/").append(weatherDataList.get(position)
+                .getIcon_status()).append("@2x.png").toString()).into(holder.iconWeather);
+        holder.txt_detailStatus.setText(new StringBuffer(weatherDataList.get(position).Description_status));
+        holder.txt_detailTime.setText(weatherDataList.get(position).DateTime);
+        holder.txt_detailTemp.setText(weatherDataList.get(position).Temp_Min+"°C - "+weatherDataList.get(position).Temp_Max+"°C");
+        holder.txt_detailWind.setText(weatherDataList.get(position).Wind+" %");
+        holder.txt_detailHumidity.setText(weatherDataList.get(position).Humidity+" m/2");
+        holder.txt_detailPressure.setText(weatherDataList.get(position).Pressure+" hPa");
 
     }
 
     @Override
     public int getItemCount() {
-        return weatherForecaseResult.getList().size();
+        return weatherDataList.size();
     }
 
     public class WeatherViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txt_detailStatus , txt_detailCityName ,txt_detailTime, txtSunset, txtSunrise;
+        TextView txt_detailStatus ,txt_detailTemp, txt_detailWind , txt_detailHumidity, txt_detailPressure;
+        TextView txt_detailTime;
         ImageView iconWeather;
-
-
 
         public WeatherViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            txt_detailTime = (TextView) itemView.findViewById(R.id.tv_detailTime);
-            txt_detailCityName = (TextView)itemView.findViewById(R.id.tv_City);
-            txt_detailStatus = (TextView)itemView.findViewById(R.id.tv_detailStatus);
-            txtSunrise = (TextView)itemView.findViewById(R.id.textSunrise);
-            txtSunset = (TextView)itemView.findViewById(R.id.textSunset);
-            iconWeather =(ImageView)itemView.findViewById(R.id.weather_icon);
+            txt_detailStatus =(TextView) itemView.findViewById(R.id.tv_detailStatus);
+            txt_detailTime =(TextView) itemView.findViewById(R.id.tv_timeUpdate);
+            txt_detailTemp =(TextView) itemView.findViewById(R.id.tv_detailTemp);
+            txt_detailWind =(TextView) itemView.findViewById(R.id.tv_detailWind);
+            txt_detailHumidity =(TextView) itemView.findViewById(R.id.tv_detailHumidity);
+            txt_detailPressure =(TextView) itemView.findViewById(R.id.tv_detailPressure);
+            iconWeather =(ImageView)itemView.findViewById(R.id.iconWeatherDetail);
         }
     }
 }

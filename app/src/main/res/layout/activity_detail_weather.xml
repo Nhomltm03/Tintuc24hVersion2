@@ -1,37 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:weightSum="12"
+    android:background="#4FC3F7"
     tools:context=".DetailWeatherActivity">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/weatherForcast_recylceview"
-        android:layout_width="0dp"
-        android:layout_height="240dp"
-        android:layout_margin="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="445dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:orientation="vertical"
-        android:weightSum="8"
+        android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weatherForcast_recylceview">
-        <View
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center|right"
-            android:background="@android:color/darker_gray" />
+
 
         <LinearLayout
             android:layout_marginLeft="15dp"
@@ -39,22 +27,23 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_margin="5dp"
-                android:layout_height="match_parent"
-                android:src="#FFEA00">
+            <!--            <ImageView-->
+            <!--                android:layout_width="45dp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:src="@drawable/gradient_background">-->
 
-            </ImageView>
+            <!--            </ImageView>-->
 
             <TextView
+                android:id="@+id/tv_fullName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="sans-serif-thin"
-                android:gravity="center|left"
-                android:text="Detail information"
-                android:textColor="#000"
+                android:gravity="center"
+                android:text="Hanoi, Viet Nam"
+                android:textColor="#fff"
                 android:textSize="25sp"
                 android:textStyle="bold">
 
@@ -64,8 +53,8 @@
         <View
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:layout_gravity="center|right"
-            android:background="@android:color/darker_gray" />
+            android:layout_gravity="center"
+            android:background="#fff"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -74,208 +63,14 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
+                android:tint="#fff"
                 android:layout_width="45dp"
                 android:layout_margin="5dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/temp"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="sans-serif-thin"
-                android:gravity="center|left"
-                android:text="Temp"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold">
-            </TextView>
-
-            <TextView
-                android:id="@+id/tv_detailTemp"
-                android:paddingRight="10dp"
-                android:gravity="center|right"
-                android:textSize="20sp"
-                android:text="24C - 25C"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-thin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TextView>
-        </LinearLayout>
-
-        <View
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center|right"
-            android:background="@android:color/darker_gray" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="45dp"
-                android:layout_margin="5dp"
-                android:layout_height="match_parent"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
-                android:src="@drawable/wind">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="sans-serif-thin"
-                android:gravity="center|left"
-                android:text="Wind"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tv_detailWind"
-                android:paddingRight="10dp"
-                android:gravity="center|right"
-                android:textSize="20sp"
-                android:text="75 m/s"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-thin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TextView>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center|right"
-            android:background="@android:color/darker_gray" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="45dp"
-                android:layout_margin="5dp"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/humidity">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="sans-serif-thin"
-                android:gravity="center|left"
-                android:text="Humidity"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:paddingRight="10dp"
-                android:id="@+id/tv_detailHumidity"
-                android:gravity="center|right"
-                android:textSize="20sp"
-                android:text="75 %"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-thin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </TextView>
-        </LinearLayout>
-
-        <View
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center|right"
-            android:background="@android:color/darker_gray" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginLeft="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="45dp"
-                android:layout_margin="5dp"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/pressure">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="sans-serif-thin"
-                android:gravity="center|left"
-                android:text="Pressure"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tv_detailPressure"
-                android:paddingRight="10dp"
-                android:gravity="center|right"
-                android:textSize="20sp"
-                android:text="24 hPa"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-thin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TextView>
-        </LinearLayout>
-
-        <View
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center|right"
-            android:background="@android:color/darker_gray" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginLeft="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="45dp"
-                android:layout_margin="5dp"
-                android:layout_height="match_parent"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
                 android:src="@drawable/population">
 
-            </de.hdodenhof.circleimageview.CircleImageView>
+            </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -284,32 +79,30 @@
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
                 android:text="Population"
-                android:textColor="#000"
-                android:textSize="20sp"
+                android:textColor="#fff"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_detailPopulation"
                 android:paddingRight="10dp"
                 android:gravity="center|right"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="2455002008"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-thin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </TextView>
 
-
-
         </LinearLayout>
 
         <View
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:layout_gravity="center|right"
-            android:background="@android:color/darker_gray" />
+            android:layout_gravity="center"
+            android:background="#fff" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -318,15 +111,14 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
+                android:tint="#fff"
                 android:layout_width="45dp"
                 android:layout_margin="5dp"
                 android:layout_height="match_parent"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
                 android:src="@drawable/location">
 
-            </de.hdodenhof.circleimageview.CircleImageView>
+            </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -334,19 +126,19 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
-                android:text="Geo Coord"
-                android:textColor="#000"
-                android:textSize="20sp"
+                android:text="GeoCoord"
+                android:textColor="#fff"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_detailGeoCoord"
                 android:paddingRight="10dp"
                 android:gravity="center|right"
-                android:textSize="20sp"
-                android:text="[245 - 002]"
+                android:textSize="18sp"
+                android:text="[245424 - 11422]"
                 android:fontFamily="sans-serif-thin"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -356,10 +148,38 @@
         <View
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:layout_gravity="center|right"
-            android:background="@android:color/darker_gray" />
+            android:layout_gravity="center"
+            android:background="#fff" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/weatherForcast_recylceview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        >
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/temp_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+        </com.github.mikephil.charting.charts.LineChart>
 
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
