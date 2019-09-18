@@ -42,8 +42,8 @@ public class WeatherPageAdapter extends RecyclerView.Adapter<WeatherPageAdapter.
         holder.txt_detailStatus.setText(new StringBuffer(weatherDataList.get(position).Description_status));
         holder.txt_detailTime.setText(weatherDataList.get(position).DateTime);
         holder.txt_detailTemp.setText(weatherDataList.get(position).Temp_Min+"°C - "+weatherDataList.get(position).Temp_Max+"°C");
-        holder.txt_detailWind.setText(weatherDataList.get(position).Wind+" %");
-        holder.txt_detailHumidity.setText(weatherDataList.get(position).Humidity+" m/2");
+        holder.txt_detailWind.setText(weatherDataList.get(position).Wind+" m/s");
+        holder.txt_detailHumidity.setText(weatherDataList.get(position).Humidity+"%");
         holder.txt_detailPressure.setText(weatherDataList.get(position).Pressure+" hPa");
 
     }

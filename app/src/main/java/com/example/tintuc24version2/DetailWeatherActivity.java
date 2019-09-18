@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -18,9 +17,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tintuc24version2.WeatherAdapter.WeatherPageAdapter;
 import com.example.tintuc24version2.WeatherModels.WeatherData;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 
 
 import org.json.JSONArray;
@@ -39,15 +35,9 @@ public class DetailWeatherActivity extends AppCompatActivity {
     public static final String UNITS = "&units=metric";
     public static final String BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
     RecyclerView recyclerView_forecast;
-    private TextView txt_fullName,txt_wind,txt_humidity,txt_pressure,txt_population,txt_geocoord;
+    private TextView txt_fullName,txt_population,txt_geocoord;
     private  WeatherPageAdapter weatherPageAdapter;
     public ArrayList<WeatherData> weatherDataList;
-
-    LineChart lineChart;
-    LineData lineData;
-    LineDataSet lineDataSet;
-    ArrayList <String>lineEntries;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +55,9 @@ public class DetailWeatherActivity extends AppCompatActivity {
         weatherDataList = new ArrayList<WeatherData>();
         weatherPageAdapter = new WeatherPageAdapter(getBaseContext(),weatherDataList);
         recyclerView_forecast.setAdapter(weatherPageAdapter);
-        lineChart = findViewById(R.id.temp_chart);
-
 
     }
-    private void getEntries() {
-        lineEntries = new ArrayList<String>();
-        lineEntries.add("19");
-        lineEntries.add("20");
-    }
+
 
     public  void  loadWeatherForecastData(String cityName){
 
@@ -88,6 +72,7 @@ public class DetailWeatherActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONObject jsonObjectCity = jsonObject.getJSONObject("city");
                             String name = jsonObjectCity.getString("name");
+                            String cityID = jsonObjectCity.getString("id");
                             String country = jsonObjectCity.getString("country");
                             Locale locale = new Locale("",country);
                             String fullname = name+", "+locale.getDisplayCountry();
@@ -130,8 +115,6 @@ public class DetailWeatherActivity extends AppCompatActivity {
 
                                 weatherDataList.add(new WeatherData(minTemp,maxTemp,humidity,pressure,wind,detail_TimeFormat
                                 ,status,icon,sunset,sunrise));
-
-
 
 
                             }

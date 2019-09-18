@@ -8,9 +8,20 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:weightSum="12"
-    android:background="#4FC3F7"
+    android:background="@drawable/rain"
     tools:context=".DetailWeatherActivity">
     <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        >
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/transparent_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
@@ -45,14 +56,14 @@
                 android:text="Hanoi, Viet Nam"
                 android:textColor="#fff"
                 android:textSize="25sp"
-                android:textStyle="bold">
+                >
 
             </TextView>
         </LinearLayout>
 
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff"/>
 
@@ -81,7 +92,7 @@
                 android:text="Population"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                />
 
             <TextView
                 android:id="@+id/tv_detailPopulation"
@@ -90,7 +101,6 @@
                 android:textSize="18sp"
                 android:text="2455002008"
                 android:textColor="#fff"
-                android:textStyle="bold"
                 android:fontFamily="sans-serif-thin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -100,7 +110,7 @@
 
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
 
@@ -129,7 +139,7 @@
                 android:text="GeoCoord"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+              />
 
             <TextView
                 android:id="@+id/tv_detailGeoCoord"
@@ -139,7 +149,6 @@
                 android:text="[245424 - 11422]"
                 android:fontFamily="sans-serif-thin"
                 android:textColor="#fff"
-                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </TextView>
@@ -147,13 +156,15 @@
         </LinearLayout>
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="5dp"
+        android:background="@drawable/transparent_bg"
         android:id="@+id/weatherForcast_recylceview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -163,23 +174,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
     </androidx.recyclerview.widget.RecyclerView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        >
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/temp_chart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            >
-
-        </com.github.mikephil.charting.charts.LineChart>
-
-    </LinearLayout>
 
 
 </LinearLayout>

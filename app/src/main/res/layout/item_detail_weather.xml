@@ -36,14 +36,14 @@
                 android:text="thunder strom"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold">
+                >
 
             </TextView>
         </LinearLayout>
 
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
 
@@ -73,7 +73,7 @@
                 android:text="Thusday 2019"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold">
+                >
 
             </TextView>
 
@@ -81,7 +81,7 @@
 
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
 
@@ -110,7 +110,7 @@
                 android:text="Temp"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold">
+                >
 
             </TextView>
 
@@ -124,14 +124,14 @@
                 android:text="24C - 25C"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold">
+               >
 
             </TextView>
         </LinearLayout>
 
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
 
@@ -160,7 +160,7 @@
                 android:text="Wind"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                />
 
             <TextView
                 android:id="@+id/tv_detailWind"
@@ -172,7 +172,7 @@
                 android:text="75 m/s"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                android:textStyle="bold">
+               >
 
             </TextView>
 
@@ -180,7 +180,7 @@
 
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
 
@@ -209,7 +209,7 @@
                 android:text="Humidity"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                />
 
             <TextView
                 android:id="@+id/tv_detailHumidity"
@@ -221,14 +221,14 @@
                 android:text="75 %"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold">
+                >
 
             </TextView>
         </LinearLayout>
 
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
 
@@ -257,7 +257,7 @@
                 android:text="Pressure"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                 />
 
             <TextView
                 android:id="@+id/tv_detailPressure"
@@ -269,14 +269,14 @@
                 android:text="24 hPa"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold">
+               >
 
             </TextView>
         </LinearLayout>
 
         <View
             android:layout_width="350dp"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
         <LinearLayout
