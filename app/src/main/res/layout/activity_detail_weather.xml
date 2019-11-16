@@ -16,7 +16,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:gravity="center"
-        >
+        tools:ignore="UselessLeaf">
 
 
     </LinearLayout>
@@ -33,10 +33,11 @@
 
 
         <LinearLayout
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            tools:ignore="NestedWeights">
 
             <!--            <ImageView-->
             <!--                android:layout_width="45dp"-->
@@ -50,13 +51,13 @@
                 android:id="@+id/tv_fullName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center"
                 android:text="Hanoi, Viet Nam"
                 android:textColor="#fff"
                 android:textSize="25sp"
-                >
+                tools:ignore="HardcodedText">
 
             </TextView>
         </LinearLayout>
@@ -69,7 +70,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
@@ -79,31 +80,33 @@
                 android:layout_width="45dp"
                 android:layout_margin="5dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/population">
+                android:src="@drawable/population"
+                tools:ignore="ContentDescription">
 
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
                 android:text="Population"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                />
+                tools:ignore="HardcodedText,RtlHardcoded" />
 
             <TextView
                 android:id="@+id/tv_detailPopulation"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:gravity="center|right"
                 android:textSize="18sp"
                 android:text="2455002008"
                 android:textColor="#fff"
                 android:fontFamily="sans-serif-thin"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry">
             </TextView>
 
         </LinearLayout>
@@ -116,7 +119,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
@@ -126,31 +129,33 @@
                 android:layout_width="45dp"
                 android:layout_margin="5dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/location">
+                android:src="@drawable/location"
+                tools:ignore="ContentDescription">
 
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
                 android:text="GeoCoord"
                 android:textColor="#fff"
                 android:textSize="18sp"
-              />
+                tools:ignore="HardcodedText,RtlHardcoded" />
 
             <TextView
                 android:id="@+id/tv_detailGeoCoord"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:gravity="center|right"
                 android:textSize="18sp"
                 android:text="[245424 - 11422]"
                 android:fontFamily="sans-serif-thin"
                 android:textColor="#fff"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry">
             </TextView>
 
         </LinearLayout>

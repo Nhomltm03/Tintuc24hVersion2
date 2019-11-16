@@ -1,6 +1,6 @@
 package com.example.tintuc24version2.api;
 
-import java.security.cert.CertificateException;
+import android.annotation.SuppressLint;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -15,9 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final  String BASE_URL_NEWS ="http://newsapi.org/v2/";
-    public  static  Retrofit retrofit;
-    public static Retrofit getApitClient(){
+    private static final  String BASE_URL_NEWS ="http://newsapi.org/v2/";
+    private static  Retrofit retrofit;
+    public static Retrofit getAPIClient(){
 
         if(retrofit == null){
             retrofit = new  Retrofit.Builder().baseUrl(BASE_URL_NEWS)
@@ -28,19 +28,19 @@ public class ApiClient {
 
         return retrofit;
     }
-public static OkHttpClient.Builder getUnsafeOKHttpClient(){
+private static OkHttpClient.Builder getUnsafeOKHttpClient(){
     try {
         // Create a trust manager that does not validate certificate chains
         final TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager() {
+                    @SuppressLint("TrustAllX509TrustManager")
                     @Override
-                    public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType)
-                            throws CertificateException {
+                    public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
                     }
 
+                    @SuppressLint("TrustAllX509TrustManager")
                     @Override
-                    public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType)
-                            throws CertificateException {
+                    public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {
                     }
 
                     @Override
@@ -60,6 +60,7 @@ public static OkHttpClient.Builder getUnsafeOKHttpClient(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
         builder.hostnameVerifier(new HostnameVerifier() {
+            @SuppressLint("BadHostnameVerifier")
             @Override
             public boolean verify(String hostname, SSLSession session) {
                 return true;

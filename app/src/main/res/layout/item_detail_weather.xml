@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:weightSum="6"
-        android:orientation="vertical">
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/iconWeatherDetail"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:tint="#fff">
-            </ImageView>
+                android:tint="#fff"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_detailStatus"
@@ -32,11 +35,11 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center"
-                android:paddingRight="10dp"
-                android:text="thunder strom"
+                android:paddingEnd="10dp"
+                android:text="@string/thunder_storm"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                >
+                tools:ignore="RtlSymmetry">
 
             </TextView>
         </LinearLayout>
@@ -50,16 +53,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:src="@drawable/baseline_access_time_white_48dp"
-                android:tint="#fff">
+                android:tint="#fff"
+                tools:ignore="ContentDescription">
 
             </ImageView>
 
@@ -69,11 +74,11 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center"
-                android:paddingRight="10dp"
-                android:text="Thusday 2019"
+                android:paddingEnd="10dp"
+                android:text="@string/thursday_2019"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                >
+                tools:ignore="RtlSymmetry">
 
             </TextView>
 
@@ -90,16 +95,16 @@
             android:layout_height="0dp"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="RtlHardcoded">
 
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:src="@drawable/temp"
-                android:tint="#fff">
-
-            </ImageView>
+                android:tint="#fff"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,10 +112,9 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
-                android:text="Temp"
+                android:text="@string/temp"
                 android:textColor="#fff"
-                android:textSize="18sp"
-                >
+                android:textSize="18sp">
 
             </TextView>
 
@@ -121,10 +125,10 @@
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|right"
                 android:paddingRight="10dp"
-                android:text="24C - 25C"
+                android:text="@string/_24c_25c"
                 android:textColor="#fff"
                 android:textSize="18sp"
-               >
+                tools:ignore="RtlSymmetry">
 
             </TextView>
         </LinearLayout>
@@ -138,7 +142,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -147,20 +151,21 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:src="@drawable/wind"
-                android:tint="#fff">
+                android:tint="#fff"
+                tools:ignore="ContentDescription">
 
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
-                android:text="Wind"
+                android:text="@string/wind"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                />
+                tools:ignore="RtlHardcoded" />
 
             <TextView
                 android:id="@+id/tv_detailWind"
@@ -169,10 +174,10 @@
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|right"
                 android:paddingRight="10dp"
-                android:text="75 m/s"
+                android:text="@string/_75_m_s"
                 android:textColor="#fff"
                 android:textSize="20sp"
-               >
+                tools:ignore="RtlHardcoded,RtlSymmetry">
 
             </TextView>
 
@@ -187,7 +192,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -196,20 +201,21 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:src="@drawable/humidity"
-                android:tint="#fff">
+                android:tint="#fff"
+                tools:ignore="ContentDescription">
 
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
-                android:text="Humidity"
+                android:text="@string/humidity"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                />
+                tools:ignore="RtlHardcoded" />
 
             <TextView
                 android:id="@+id/tv_detailHumidity"
@@ -217,11 +223,11 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|right"
-                android:paddingRight="10dp"
-                android:text="75 %"
+                android:paddingEnd="10dp"
+                android:text="@string/_75"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                >
+                tools:ignore="RtlHardcoded,RtlSymmetry">
 
             </TextView>
         </LinearLayout>
@@ -235,7 +241,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -244,9 +250,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:src="@drawable/pressure"
-                android:tint="#fff">
-
-            </ImageView>
+                android:tint="#fff"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -254,10 +259,10 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
-                android:text="Pressure"
+                android:text="@string/pressure"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                 />
+                tools:ignore="RtlHardcoded" />
 
             <TextView
                 android:id="@+id/tv_detailPressure"
@@ -265,11 +270,11 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|right"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:text="24 hPa"
                 android:textColor="#fff"
                 android:textSize="18sp"
-               >
+                tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry">
 
             </TextView>
         </LinearLayout>
@@ -279,12 +284,12 @@
             android:layout_height="1px"
             android:layout_gravity="center"
             android:background="#fff" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            >
-        </LinearLayout>
+            tools:ignore="UselessLeaf" />
     </LinearLayout>
 
 

@@ -12,6 +12,10 @@ public class Source {
     @Expose
     private  String name;
 
+    public Source(String name) {
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }
@@ -24,7 +28,4 @@ public class Source {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

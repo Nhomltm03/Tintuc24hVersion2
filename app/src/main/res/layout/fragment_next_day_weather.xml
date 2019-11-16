@@ -33,13 +33,12 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:background="@color/colorPrimary"
-                android:layout_marginLeft="45dp"
+                android:layout_marginStart="45dp"
                 android:layout_width="55dp"
-                android:layout_height="match_parent">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
+                android:layout_height="match_parent" />
             <TextView
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-thin"
@@ -50,14 +49,15 @@
                 android:textColor="#000"
                 android:gravity="center|left"
                 android:text="Detail information"
-                >
+                tools:ignore="HardcodedText,RtlHardcoded">
             </TextView>
         </LinearLayout>
         <View
             android:layout_gravity="center|right"
             android:layout_width="300dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            tools:ignore="RtlHardcoded" />
         <LinearLayout
             android:layout_margin="5dp"
             android:layout_weight="1"
@@ -65,7 +65,7 @@
             android:layout_height="0dp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:background="@drawable/temp"
-                android:layout_marginLeft="45dp"
+                android:layout_marginStart="45dp"
                 android:layout_width="55dp"
                 android:layout_height="match_parent"
                 app:civ_border_width="2dp"
@@ -82,24 +82,27 @@
                 android:textSize="25sp"
                 android:gravity="center|left"
                 android:text="Temp"
-                >
+                tools:ignore="HardcodedText,RtlHardcoded">
             </TextView>
         </LinearLayout>
         <View
             android:layout_gravity="center|right"
             android:layout_width="300dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            tools:ignore="RtlHardcoded" />
         <LinearLayout
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            tools:ignore="UseCompoundDrawables">
             <ImageView
                 android:background="@drawable/wind"
-                android:layout_marginLeft="45dp"
+                android:layout_marginStart="45dp"
                 android:layout_width="55dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="ContentDescription">
 
             </ImageView>
 
@@ -113,23 +116,26 @@
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center|left"
                 android:text="Wind"
-               />
+                tools:ignore="HardcodedText,RtlHardcoded" />
         </LinearLayout>
         <View
             android:layout_gravity="center|right"
             android:layout_width="300dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            tools:ignore="RtlHardcoded" />
         <LinearLayout
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            tools:ignore="UseCompoundDrawables">
             <ImageView
                 android:background="@drawable/humidity"
-                android:layout_marginLeft="45dp"
+                android:layout_marginStart="45dp"
                 android:layout_width="55dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="ContentDescription">
 
             </ImageView>
             <TextView
@@ -142,24 +148,27 @@
                 android:textSize="25sp"
                 android:gravity="center|left"
                 android:text="Humidity"
-               />
+                tools:ignore="HardcodedText,RtlHardcoded" />
         </LinearLayout>
         <View
             android:layout_gravity="center|right"
             android:layout_width="300dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            tools:ignore="RtlHardcoded" />
 
         <LinearLayout
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            tools:ignore="UseCompoundDrawables">
             <ImageView
                 android:background="@drawable/pressure"
-                android:layout_marginLeft="45dp"
+                android:layout_marginStart="45dp"
                 android:layout_width="55dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="ContentDescription">
 
             </ImageView>
             <TextView
@@ -173,23 +182,26 @@
                 android:textSize="25sp"
                 android:gravity="center|left"
                 android:text="Pressure"
-               />
+                tools:ignore="HardcodedText,RtlHardcoded" />
         </LinearLayout>
         <View
             android:layout_gravity="center|right"
             android:layout_width="300dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            tools:ignore="RtlHardcoded" />
         <LinearLayout
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            tools:ignore="UseCompoundDrawables">
             <ImageView
                 android:background="@drawable/population"
-                android:layout_marginLeft="45dp"
+                android:layout_marginStart="45dp"
                 android:layout_width="55dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="ContentDescription">
 
             </ImageView>
             <TextView
@@ -202,23 +214,26 @@
                 android:textSize="25sp"
                 android:gravity="center|left"
                 android:text="Population"
-               />
+                tools:ignore="HardcodedText,RtlHardcoded" />
         </LinearLayout>
         <View
             android:layout_gravity="center|right"
             android:layout_width="300dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            tools:ignore="RtlHardcoded" />
         <LinearLayout
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            tools:ignore="UseCompoundDrawables">
             <ImageView
                 android:background="@drawable/location"
                 android:layout_marginLeft="45dp"
                 android:layout_width="55dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="ContentDescription,RtlHardcoded">
 
             </ImageView>
             <TextView
@@ -231,14 +246,15 @@
                 android:textSize="25sp"
                 android:gravity="center|left"
                 android:text="Geo Coord"
-               />
+                tools:ignore="HardcodedText,RtlHardcoded" />
 
         </LinearLayout>
         <View
             android:layout_gravity="center|right"
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            tools:ignore="RtlHardcoded" />
     </LinearLayout>
 
 

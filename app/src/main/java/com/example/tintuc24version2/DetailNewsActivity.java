@@ -2,20 +2,16 @@ package com.example.tintuc24version2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.appcompat.widget.Toolbar;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,46 +24,43 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 public class DetailNewsActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
-    private KenBurnsView imageView;
-    private TextView appbar_title, appbar_subtitle, date, time ,title;
+
     private FrameLayout date_behavior;
     private  boolean isHideToolBarView =  false;
     private LinearLayout titleAppbar;
-    private Toolbar toolbar;
-    private AppBarLayout appBarLayout;
-    private  String mUrl, mImg , mTitle, mDate , mSource ,mAuthor;
+    private  String mUrl;
+    private String mTitle;
+    private String mSource;
 
 
+    @SuppressLint({"CheckResult", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_news);
-       toolbar  = findViewById(R.id.toolbar);
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("");
-
-        //showPopup();
-        appBarLayout = findViewById(R.id.appbar);
+        AppBarLayout appBarLayout = findViewById(R.id.appbar);
         appBarLayout.addOnOffsetChangedListener(this);
         date_behavior = findViewById(R.id.date_behavior);
         titleAppbar = findViewById(R.id.title_appbar);
-        imageView = findViewById(R.id.backdrop);
-        appbar_title = findViewById(R.id.title_on_appbar);
-        appbar_subtitle = findViewById(R.id.subtitle_on_appbar);
-        date = findViewById(R.id.date);
-        time = findViewById(R.id.time);
-        title = findViewById(R.id.title);
+        KenBurnsView imageView = findViewById(R.id.backdrop);
+        TextView appbar_title = findViewById(R.id.title_on_appbar);
+        TextView appbar_subtitle = findViewById(R.id.subtitle_on_appbar);
+        TextView date = findViewById(R.id.date);
+        TextView time = findViewById(R.id.time);
+        TextView title = findViewById(R.id.title);
 
         Intent intent = getIntent();
         mUrl = intent.getStringExtra("url");
-        mImg = intent.getStringExtra("img");
+        String mImg = intent.getStringExtra("img");
         mTitle = intent.getStringExtra("title");
-        mDate = intent.getStringExtra("date");
+        String mDate = intent.getStringExtra("date");
         mSource = intent.getStringExtra("source");
-        mAuthor = intent.getStringExtra("author");
+        String mAuthor = intent.getStringExtra("author");
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.error(Utils.getRandomDrawbleColor());
+        requestOptions.error(Utils.getRandomDrawableColor());
         Glide.with(this)
                 .load(mImg)
                 .apply(requestOptions)
@@ -79,16 +72,12 @@ public class DetailNewsActivity extends AppCompatActivity implements AppBarLayou
         date.setText(Utils.DateFormat(mDate));
         title.setText(mTitle);
 
-        String author = null;
-        if(mAuthor != null || mAuthor != "" ){
-               mAuthor = " \u2022 " + mAuthor;
-        } else {
-            author = "";
-        }
-        time.setText(mAuthor + author + " \u2022 " + Utils.DateToTimeFormat(mDate) );
+        mAuthor = " \u2022 " + mAuthor;
+        time.setText(mAuthor + null + " \u2022 " + Utils.DateToTimeFormat(mDate) );
 
         initView(mUrl);
     }
+    @SuppressLint("SetJavaScriptEnabled")
     private  void  initView(String url){
         WebView webView = findViewById(R.id.webView);
         webView.getSettings().setLoadsImagesAutomatically(true);

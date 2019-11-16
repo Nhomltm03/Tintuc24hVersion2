@@ -1,8 +1,10 @@
 package com.example.tintuc24version2;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
+import org.jetbrains.annotations.NotNull;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.ParseException;
@@ -13,7 +15,7 @@ import java.util.Random;
 
 public class Utils {
 
-    public static ColorDrawable[] vibrantLightColorList =
+    private static ColorDrawable[] vibrantLightColorList =
             {
                     new ColorDrawable(Color.parseColor("#ffeead")),
                     new ColorDrawable(Color.parseColor("#93cfb3")),
@@ -25,18 +27,19 @@ public class Utils {
                     new ColorDrawable(Color.parseColor("#d93947"))
             };
 
-    public static ColorDrawable getRandomDrawbleColor() {
+
+    public static ColorDrawable getRandomDrawableColor() {
         int idx = new Random().nextInt(vibrantLightColorList.length);
         return vibrantLightColorList[idx];
     }
 
-    public static String DateToTimeFormat(String oldstringDate){
+    static String DateToTimeFormat(String oldStringDate){
         PrettyTime p = new PrettyTime(new Locale(getCountry()));
         String isTime = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
                     Locale.ENGLISH);
-            Date date = sdf.parse(oldstringDate);
+            Date date = sdf.parse(oldStringDate);
             isTime = p.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -45,29 +48,31 @@ public class Utils {
         return isTime;
     }
 
-    public static String DateFormat(String oldstringDate){
+    public static String DateFormat(String oldStringDate){
         String newDate;
         SimpleDateFormat dateFormat = new SimpleDateFormat("E, d MMM yyyy", new Locale(getCountry()));
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldstringDate);
+            @SuppressLint("SimpleDateFormat") Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldStringDate);
+            assert date != null;
             newDate = dateFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
-            newDate = oldstringDate;
+            newDate = oldStringDate;
         }
 
         return newDate;
     }
 
-    public static String getCountry(){
+    @NotNull
+    static String getCountry(){
         Locale locale = Locale.getDefault();
-        String country = String.valueOf(locale.getCountry());
+        String country = locale.getCountry();
         return country.toLowerCase();
     }
 
-    public static String getLanguage(){
+    static String getLanguage(){
         Locale locale = Locale.getDefault();
-        String country = String.valueOf(locale.getLanguage());
+        String country = locale.getLanguage();
         return country.toLowerCase();
     }
 }

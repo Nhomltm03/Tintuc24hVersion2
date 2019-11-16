@@ -1,4 +1,5 @@
 package com.example.tintuc24version2;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -16,12 +17,8 @@ public class MainActivity extends AppCompatActivity {
       NewsFragment newsFragment;
       MenuItem prevMenuItem;
 
-
-
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -38,12 +35,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final BottomNavigationView navView = findViewById(R.id.nav_view);
-        viewPager = (ViewPager) findViewById(R.id.viewPagerMain);
+        viewPager = findViewById(R.id.viewPagerMain);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

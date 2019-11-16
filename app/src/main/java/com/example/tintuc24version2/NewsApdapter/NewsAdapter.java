@@ -1,26 +1,21 @@
 package com.example.tintuc24version2.NewsApdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestFutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
@@ -55,14 +50,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holders, int position) {
 
         final NewsViewHolder holder = holders;
         Article  model = articles.get(position);
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(Utils.getRandomDrawbleColor());
-        requestOptions.error(Utils.getRandomDrawbleColor());
+        requestOptions.placeholder(Utils.getRandomDrawableColor());
+        requestOptions.error(Utils.getRandomDrawableColor());
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
         requestOptions.centerCrop();
 
@@ -88,16 +84,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.title.setText(model.getTitle());
         holder.desc.setText(model.getDescription());
         holder.source.setText(model.getSource().getName());
-        holder.publisedAd.setText(Utils.DateFormat(model.getPublisedAt()));
-        if(model.getPublisedAt() != null) {
+        holder.publishedAd.setText(Utils.DateFormat(model.getPublishedAt()));
+        if(model.getPublishedAt() != null) {
             Date date = null;
             try {
-                date = ISO8601Parse.parse(model.getPublisedAt());
+                date = ISO8601Parse.parse(model.getPublishedAt());
             } catch (ParseException ex) {
                 ex.printStackTrace();
 
             }
 
+            assert date != null;
             holder.time.setReferenceTime(date.getTime());
         }
         holder.author.setText(model.getAuthor());
@@ -113,22 +110,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView title, desc,author, publisedAd, source;
+        TextView title, desc,author, publishedAd, source;
         KenBurnsView imageSource;
         ProgressBar progressBar;
         RelativeTimeTextView time;
         OnItemClickListener onItemClickListener;
 
-        public NewsViewHolder(@NonNull View itemView,OnItemClickListener mOnItemClickListener) {
+        NewsViewHolder(@NonNull View itemView, OnItemClickListener mOnItemClickListener) {
             super(itemView);
 
             itemView.setOnClickListener(this);
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
             author = itemView.findViewById(R.id.author);
-            publisedAd = itemView.findViewById(R.id.publisedAt);
+            publishedAd = itemView.findViewById(R.id.publishedAt);
             source = itemView.findViewById(R.id.source);
-            time =(RelativeTimeTextView) itemView.findViewById(R.id.time);
+            time = itemView.findViewById(R.id.time);
             imageSource = itemView.findViewById(R.id.source_image);
             progressBar = itemView.findViewById(R.id.progress_load_image);
             this.onItemClickListener = mOnItemClickListener;

@@ -23,6 +23,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimaryDark"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:titleEnabled="false">
 
             <com.flaviofaria.kenburnsview.KenBurnsView
@@ -48,7 +49,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/top_shadow" />
+                    android:src="@drawable/top_shadow"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/img2"
@@ -56,7 +58,8 @@
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bottom_shadow" />
+                    android:src="@drawable/bottom_shadow"
+                    tools:ignore="ContentDescription" />
 
             </RelativeLayout>
 
@@ -69,6 +72,7 @@
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 >
 
                 <LinearLayout
@@ -85,11 +89,12 @@
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
                         android:ellipsize="end"
-                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:text="News for you"
-                        android:textSize="18dp" />
+                        android:textSize="18dp"
+                        tools:ignore="HardcodedText,RtlSymmetry,SpUsage" />
 
                     <TextView
                         android:id="@+id/subtitle_on_appbar"
@@ -97,12 +102,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:text="Subtitle"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
 
                 </LinearLayout>
 
@@ -128,7 +134,8 @@
                 android:layout_width="match_parent"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="@dimen/cardview_default_elevation"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="PrivateResource">
                 <RelativeLayout
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"
@@ -145,7 +152,7 @@
                         android:text="Title of News"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        />
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/time"
@@ -157,7 +164,8 @@
                         android:drawablePadding="10dp"
                         android:singleLine="true"
                         android:ellipsize="end"
-                        android:text="a time ago" />
+                        android:text="a time ago"
+                        tools:ignore="HardcodedText" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -169,7 +177,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="@dimen/cardview_default_elevation"
-                app:cardCornerRadius="0dp">
+                app:cardCornerRadius="0dp"
+                tools:ignore="PrivateResource">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -214,21 +223,23 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="410dp"
         android:layout_height="wrap_content"
-        tools:ignore="UnusedAttribute">
+        tools:ignore="RtlHardcoded,UnusedAttribute">
         <ImageView
             android:src="@drawable/ic_date"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            tools:ignore="ContentDescription" />
         <TextView
             android:textColor="#606060"
             android:id="@+id/date"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginEnd="10dp"
             android:text="01 January 1990"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

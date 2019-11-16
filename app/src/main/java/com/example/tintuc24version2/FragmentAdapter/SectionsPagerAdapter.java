@@ -1,11 +1,8 @@
 package com.example.tintuc24version2.FragmentAdapter;
-
 import androidx.fragment.app.Fragment;
-
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +11,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 
     public SectionsPagerAdapter(FragmentManager manager) {
-        super(manager);
+        super(manager,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         return mFragmentList.get(position);

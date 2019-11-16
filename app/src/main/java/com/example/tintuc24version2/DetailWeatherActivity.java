@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,88 +34,87 @@ public class DetailWeatherActivity extends AppCompatActivity {
     public static final String API_KEY_WEATHER = "&appid=27a77fcad68bf8df89e0124c586f0d30";
     public static final String UNITS = "&units=metric";
     public static final String BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
-    RecyclerView recyclerView_forecast;
-    private TextView txt_fullName,txt_population,txt_geocoord;
-    private  WeatherPageAdapter weatherPageAdapter;
+    public static final String JSON_OBJECT_KEY_CITY = "city";
+    public static final String JSON_OBJECT_KEY_COUNTRY = "country";
+    public static final String JSON_OBJECT_KEY_NAME = "name";
+    public static final String JSON_OBJECT_KEY_POPULATION = "population";
+    public static final String JSON_OBJECT_KEY_COORD = "coord";
+    public static final String JSON_OBJECT_KEY_LAT = "lat";
+    public static final String JSON_OBJECT_KEY_LON = "lon";
+    public static final String JSON_OBJECT_KEY_MAIN = "main";
+    public static final String JSON_OBJECT_KEY_LIST = "list";
+    public static final String JSON_OBJECT_KEY_TEMP_MAX = "temp_max";
+    public static final String JSON_OBJECT_KEY_TEMP_MIN = "temp_min";
+    public static final String JSON_OBJECT_KEY_HUMIDITY = "humidity";
+    public static final String JSON_OBJECT_KEY_PRESSURE = "pressure";
+    public static final String JSON_OBJECT_KEY_DATE_TIME = "dt";
+    public static final String JSON_OBJECT_KEY_WEATHER = "weather";
+    public static final String JSON_OBJECT_KEY_DESCRIPTION = "description";
+    public static final String JSON_OBJECT_KEY_ICON = "icon";
+    public static final String JSON_OBJECT_KEY_WIND = "wind";
+    public static final String JSON_OBJECT_KEY_SPEED = "speed";
+    public static final String DATE_TIME_FORMAT_CURRENT_DAY = "EEEE MM/dd/yyyy";
+    public static final String DATE_TIME_FORMAT_CURRENT_HOURS = "HH";
+    public static final String EXTRA_QUERY_NAME = "cityName";
+    RecyclerView rvForecast;
+    private TextView tvFullName, tvPopulation, tvGeocoord;
+    private WeatherPageAdapter weatherPageAdapter;
     public ArrayList<WeatherData> weatherDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_weather);
-        recyclerView_forecast = (RecyclerView) findViewById(R.id.weatherForcast_recylceview);
-        recyclerView_forecast.setHasFixedSize(true);
-        recyclerView_forecast.setLayoutManager(new LinearLayoutManager(getParent(),LinearLayoutManager.HORIZONTAL,false));
-        txt_fullName =(TextView) findViewById(R.id.tv_fullName);
-        txt_population =(TextView) findViewById(R.id.tv_detailPopulation);
-        txt_geocoord =(TextView) findViewById(R.id.tv_detailGeoCoord);
-        Intent intent = getIntent();
-        String queryName = intent.getStringExtra("cityName");
-        loadWeatherForecastData(queryName);
-        weatherDataList = new ArrayList<WeatherData>();
-        weatherPageAdapter = new WeatherPageAdapter(getBaseContext(),weatherDataList);
-        recyclerView_forecast.setAdapter(weatherPageAdapter);
-
+        rvForecast = findViewById(R.id.weatherForcast_recylceview);
+        rvForecast.setHasFixedSize(true);
+        rvForecast.setLayoutManager(new LinearLayoutManager(getParent(), LinearLayoutManager.HORIZONTAL, false));
+        tvFullName = findViewById(R.id.tv_fullName);
+        tvGeocoord = findViewById(R.id.tv_detailGeoCoord);
+        tvPopulation = findViewById(R.id.tv_detailPopulation);
+        loadWeatherForecastData(getIntent().getStringExtra(EXTRA_QUERY_NAME));
+        weatherDataList = new ArrayList<>();
+        weatherPageAdapter = new WeatherPageAdapter(getBaseContext(), weatherDataList);
+        rvForecast.setAdapter(weatherPageAdapter);
     }
 
 
-    public  void  loadWeatherForecastData(String cityName){
-
-        String queryUrl = BASE_URL+cityName+UNITS+CNT+API_KEY_WEATHER;
+    public void loadWeatherForecastData(String cityName) {
+        String queryUrl = BASE_URL + cityName + UNITS + CNT + API_KEY_WEATHER;
         RequestQueue requestQueue = Volley.newRequestQueue(DetailWeatherActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, queryUrl,
                 new Response.Listener<String>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onResponse(String response) {
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            JSONObject jsonObjectCity = jsonObject.getJSONObject("city");
-                            String name = jsonObjectCity.getString("name");
-                            String cityID = jsonObjectCity.getString("id");
-                            String country = jsonObjectCity.getString("country");
-                            Locale locale = new Locale("",country);
-                            String fullname = name+", "+locale.getDisplayCountry();
-                            txt_fullName.setText(fullname);
-                            String population  = jsonObjectCity.getString("population");
-                            txt_population.setText(population);
-                            String geoCoord_lat = jsonObjectCity.getJSONObject("coord").getString("lat");
-                            String geoCoord_lon = jsonObjectCity.getJSONObject("coord").getString("lon");
-                            Double lon = Double.valueOf(geoCoord_lon);
-                            Double lat = Double.valueOf(geoCoord_lat);
-                            String  geoCoord = "["+lat+","+lon+"]";
-                            txt_geocoord.setText(geoCoord);
-                            JSONArray jsonArrayList = jsonObject.getJSONArray("list");
+                            JSONObject jsonObjectCity = jsonObject.getJSONObject(JSON_OBJECT_KEY_CITY);
+                            Locale locale = new Locale("", jsonObjectCity.getString(JSON_OBJECT_KEY_COUNTRY));
+                            tvFullName.setText(jsonObjectCity.getString(JSON_OBJECT_KEY_NAME) + ", " + locale.getDisplayCountry());
+                            tvPopulation.setText(jsonObjectCity.getString(JSON_OBJECT_KEY_POPULATION));
+                            tvGeocoord.setText("[" + jsonObjectCity.getJSONObject(JSON_OBJECT_KEY_COORD).getString(JSON_OBJECT_KEY_LAT) + "," +
+                                    jsonObjectCity.getJSONObject(JSON_OBJECT_KEY_COORD).getString(JSON_OBJECT_KEY_LON) + "]");
+                            JSONArray jsonArrayList = jsonObject.getJSONArray(JSON_OBJECT_KEY_LIST);
                             for (int i = 0; i < jsonArrayList.length(); i++) {
                                 JSONObject jsonObjectList = jsonArrayList.getJSONObject(i);
-                                String dateTime = jsonObjectList.getString("dt");
-                                long m_timeFormat = Long.valueOf(dateTime);
-                                Date date_Formater = new Date(m_timeFormat * 1000L);
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE MM/dd/yyyy");
-                                SimpleDateFormat simpleDateFormatHour = new SimpleDateFormat("HH");
-                                String detail_TimeFormat =simpleDateFormatHour.format(date_Formater)+"h "+
-                                        simpleDateFormat.format(date_Formater);
+                                Date date_Formatter = new Date(Long.valueOf(jsonObjectList.getString(JSON_OBJECT_KEY_DATE_TIME)) * 1000L);
+                                @SuppressLint("SimpleDateFormat") String detailTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT_CURRENT_DAY).format(date_Formatter) + "h " +
+                                        new SimpleDateFormat(DATE_TIME_FORMAT_CURRENT_HOURS).format(date_Formatter);
 
-                                String sunset = jsonObjectCity.getString("sunset")+"";
-                                String sunrise = jsonObjectCity.getString("sunrise")+"";
-
-                                JSONObject jsonObjectMain = jsonObjectList.getJSONObject("main");
-                                String maxTemp = jsonObjectMain.getString("temp_max")+"";
-                                String minTemp = jsonObjectMain.getString("temp_min")+"";
-                                String humidity = jsonObjectMain.getString("humidity")+"";
-                                String pressure = jsonObjectMain.getString("pressure")+"";
-
-                                JSONArray jsonArrayWeather = jsonObjectList.getJSONArray("weather");
+                                JSONObject jsonObjectMain = jsonObjectList.getJSONObject(JSON_OBJECT_KEY_MAIN);
+                                JSONArray jsonArrayWeather = jsonObjectList.getJSONArray(JSON_OBJECT_KEY_WEATHER);
                                 JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
-                                String status = jsonObjectWeather.getString("description");
-                                String icon = jsonObjectWeather.getString("icon");
+                                String maxTemp = jsonObjectMain.getString(JSON_OBJECT_KEY_TEMP_MAX) + "";
+                                String minTemp = jsonObjectMain.getString(JSON_OBJECT_KEY_TEMP_MIN) + "";
+                                String humidity = jsonObjectMain.getString(JSON_OBJECT_KEY_HUMIDITY) + "";
+                                String pressure = jsonObjectMain.getString(JSON_OBJECT_KEY_PRESSURE) + "";
+                                String status = jsonObjectWeather.getString(JSON_OBJECT_KEY_DESCRIPTION);
+                                String icon = jsonObjectWeather.getString(JSON_OBJECT_KEY_ICON);
+                                String wind = jsonObjectList.getJSONObject(JSON_OBJECT_KEY_WIND).getString(JSON_OBJECT_KEY_SPEED);
 
-                                JSONObject jsonObjectWind = jsonObjectList.getJSONObject("wind");
-                                String wind = jsonObjectWind.getString("speed");
-
-                                weatherDataList.add(new WeatherData(minTemp,maxTemp,humidity,pressure,wind,detail_TimeFormat
-                                ,status,icon,sunset,sunrise));
-
+                                weatherDataList.add(new WeatherData(minTemp, maxTemp, humidity, pressure, wind, detailTimeFormat
+                                        , status, icon));
 
                             }
                             weatherPageAdapter.notifyDataSetChanged();
@@ -135,7 +134,6 @@ public class DetailWeatherActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
-
 
 
 }

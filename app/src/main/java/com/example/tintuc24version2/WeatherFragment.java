@@ -1,5 +1,5 @@
 package com.example.tintuc24version2;
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -24,11 +24,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Locale;
+import java.util.Objects;
 
 
 /**
@@ -36,8 +36,21 @@ import java.util.Locale;
  */
 public class WeatherFragment extends Fragment {
 
-    private String sendCityname= "Hanoi";
-    private TextView textViewCity, textViewTemp, textViewStatus;
+    private static final String JSON_OBJECT_KEY_NAME = "name";
+    private static final String JSON_OBJECT_KEY_SYS = "sys";
+    private static final String JSON_OBJECT_KEY_COUNTRY = "country";
+    private static final String JSON_OBJECT_KEY_MAIN = "main";
+    private static final String JSON_OBJECT_KEY_TEMP = "temp";
+    private static final String JSON_OBJECT_KEY_WEATHER = "weather";
+    private static final String JSON_OBJECT_KEY_DESCRIPTION = "description";
+    private static final String JSON_OBJECT_KEY_ICON = "icon";
+    private static final String URL_CONVERT_ICON = "http://openweathermap.org/img/wn/";
+    private static final String URL_CONVERT_ICON_TYPE = "@2x.png";
+    private static final String EXTRA_CITY_NAME = "cityName";
+    private static final String QUERY_HINT = "Search City Weather...";
+    private static final String DEFAULT_CITY_NAME= "Hanoi";
+    private String sendCityName;
+    private TextView tvCity, tvTemp, tvStatus;
     private ImageView iconWeather;
 
     public WeatherFragment() {
@@ -53,43 +66,41 @@ public class WeatherFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_weather, container, false);
 
-        textViewCity = (TextView) rootView.findViewById(R.id.tv_City);
-        textViewStatus = (TextView) rootView.findViewById(R.id.tv_Status);
-        textViewTemp = (TextView) rootView.findViewById(R.id.tv_Temp);
-        iconWeather = (ImageView) rootView.findViewById(R.id.iconStatusWeather) ;
-        loadCurrentWeatherData("Hanoi");
+        tvCity = rootView.findViewById(R.id.tv_City);
+        tvStatus= rootView.findViewById(R.id.tv_status);
+        tvTemp = rootView.findViewById(R.id.tv_Temp);
+        iconWeather = rootView.findViewById(R.id.iconStatusWeather);
+        loadCurrentWeatherData(DEFAULT_CITY_NAME);
         return rootView;
     }
 
-
-
-    public  void  loadCurrentWeatherData(String cityName){
+    private void  loadCurrentWeatherData(String cityName){
         String queryUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=metric&appid=27a77fcad68bf8df89e0124c586f0d30";
-        RequestQueue requestQueue = Volley.newRequestQueue((Activity)getActivity());
+        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, queryUrl,
                 new com.android.volley.Response.Listener<String>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onResponse(String response) {
-
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String cityName = jsonObject.getString("name");
-                            JSONObject jsonObjectSys = jsonObject.getJSONObject("sys");
-                            String country = jsonObjectSys.getString("country");
-                            Locale locale = new Locale("",country);
-                            String fullname = cityName+", "+locale.getDisplayCountry();
-                            textViewCity.setText(fullname);
-                            JSONObject jsonObjectTemp = jsonObject.getJSONObject("main");
-                            String temp = jsonObjectTemp.getString("temp");
-                            textViewTemp.setText(temp+"°C");
-                            JSONArray jsonArrayWeather = jsonObject.getJSONArray("weather");
-                            JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
-                            String status = jsonObjectWeather.getString("description");
-                            String icon = jsonObjectWeather.getString("icon");
-                            textViewStatus.setText(status);
+                            Locale locale = new Locale("",jsonObject
+                                    .getJSONObject(JSON_OBJECT_KEY_SYS)
+                                    .getString(JSON_OBJECT_KEY_COUNTRY));
+                            tvCity.setText(jsonObject
+                                    .getString(JSON_OBJECT_KEY_NAME)+", "+locale.getDisplayCountry());
+                            tvTemp.setText(jsonObject
+                                    .getJSONObject(JSON_OBJECT_KEY_MAIN)
+                                    .getString(JSON_OBJECT_KEY_TEMP)+"°C");
+                            JSONObject jsonObjectWeather = jsonObject
+                                    .getJSONArray(JSON_OBJECT_KEY_WEATHER)
+                                    .getJSONObject(0);
+                            tvStatus.setText(jsonObjectWeather
+                                    .getString(JSON_OBJECT_KEY_DESCRIPTION));
                             Picasso.get()
-                                    .load("http://openweathermap.org/img/wn/"+icon+"@2x.png").into(iconWeather);
-
+                                    .load(URL_CONVERT_ICON
+                                            +jsonObjectWeather.getString(JSON_OBJECT_KEY_ICON)+ URL_CONVERT_ICON_TYPE)
+                                    .into(iconWeather);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -106,30 +117,29 @@ public class WeatherFragment extends Fragment {
         requestQueue.add(stringRequest);
 
     }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_weather,menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.weather_seach:
-                SearchManager searchManager = (SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
+                SearchManager searchManager = (SearchManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SEARCH_SERVICE);
                 final SearchView searchView = (SearchView) item.getActionView();
+                assert searchManager != null;
                 searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-                searchView.setQueryHint("Search City Weather...");
+                searchView.setQueryHint(QUERY_HINT);
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String s) {
                         if(s.length() > 2){
                             loadCurrentWeatherData(s);
-                            sendCityname = s;
+                            sendCityName = s;
                         }else {
-                            sendCityname ="Hanoi";
+                            sendCityName ="Hanoi";
                         }
                         return false;
                     }
@@ -142,8 +152,8 @@ public class WeatherFragment extends Fragment {
                 item.getIcon().setVisible(false,false);
                 return true;
             case R.id.action_setting_weather:
-                Intent intent = new Intent((Activity)getActivity(),DetailWeatherActivity.class);
-                intent.putExtra("cityName",sendCityname);
+                Intent intent = new Intent(getActivity(),DetailWeatherActivity.class);
+                intent.putExtra(EXTRA_CITY_NAME,sendCityName);
                 startActivity(intent);
                 return true;
             default:

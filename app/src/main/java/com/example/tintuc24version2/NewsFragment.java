@@ -1,7 +1,5 @@
 package com.example.tintuc24version2;
 
-
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.appcompat.widget.SearchView;
+
 import com.example.tintuc24version2.Models.Article;
 import com.example.tintuc24version2.Models.News;
 import com.example.tintuc24version2.NewsApdapter.NewsAdapter;
@@ -28,8 +28,11 @@ import com.example.tintuc24version2.NewsApdapter.OnItemClickListener;
 import com.example.tintuc24version2.api.ApiClient;
 import com.example.tintuc24version2.api.ApiInterface;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,18 +44,24 @@ import retrofit2.Response;
  */
 public class NewsFragment extends Fragment {
 
-public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
+    private static final String API_KEY = "7c988e9136a0403e923f294a123f2995";
+    private static final String API_QUERY_SORT_BY = "publishedAt";
+    private static final String QUERY_HINT = "Search Latest News...";
+    private static final String EXTRA_URL = "url";
+    private static final String EXTRA_TITLE = "title";
+    private static final String EXTRA_IMG = "img";
+    private static final String EXTRA_DATE = "date";
+    private static final String EXTRA_SOURCE = "source";
+    private static final String EXTRA_AUTHOR = "author";
+    private static final String API_QUERY_COUNTRY = "us";
+    private RecyclerView recyclerView;
+    private List<Article> articles = new ArrayList<>();
+    private NewsAdapter newsAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public NewsFragment() {
         // Required empty public constructor
     }
-
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private List<Article> articles = new ArrayList<>();
-    private NewsAdapter newsAdapter;
-    private String TAG = MainActivity.class.getSimpleName();
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,15 +70,15 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_news, container, false);
-        swipeRefreshLayout =(SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 LoadJSon("");
             }
         });
-        recyclerView =(RecyclerView)rootView.findViewById(R.id.recycleView);
-        layoutManager = new LinearLayoutManager(rootView.getContext());
+        recyclerView = rootView.findViewById(R.id.recycleView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(rootView.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
@@ -79,32 +88,31 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
 
         return rootView;
     }
-
-    private void LoadJSon( final  String keyword ){
-        ApiInterface apiInterface = ApiClient.getApitClient().create(ApiInterface.class);
-        String country = Utils.getCountry();
+    private void LoadJSon(final String keyword) {
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
         String language = Utils.getLanguage();
 
         swipeRefreshLayout.setRefreshing(true);
 
         Call<News> call;
 
-        if(keyword.length() > 0){
-            call = apiInterface.getNewsSearch(keyword, language ,"publishedAt", API_KEY);
+        if (keyword.length() > 0) {
+            call = apiInterface.getNewsSearch(keyword, language, API_QUERY_SORT_BY, API_KEY);
         } else {
-            call = apiInterface.getNews("us",API_KEY); // because some country code Api have no result
+            call = apiInterface.getNews(API_QUERY_COUNTRY, API_KEY); // because some country code Api have no result
 
             // set default country us
         }
 
         call.enqueue(new Callback<News>() {
             @Override
-            public void onResponse(Call<News> call, Response<News> response) {
-                if (response.isSuccessful() && response.body().getAritcle() != null){
-                    if(!articles.isEmpty()){
+            public void onResponse(@NotNull Call<News> call, @NotNull Response<News> response) {
+                assert response.body() != null;
+                if (response.isSuccessful() && response.body().getArticle() != null) {
+                    if (!articles.isEmpty()) {
                         articles.clear();
                     }
-                    articles = response.body().getAritcle();
+                    articles = response.body().getArticle();
                     newsAdapter = new NewsAdapter(articles, getActivity());
                     recyclerView.setAdapter(newsAdapter);
                     newsAdapter.notifyDataSetChanged();
@@ -117,7 +125,7 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
             }
 
             @Override
-            public void onFailure(Call<News> call, Throwable t) {
+            public void onFailure(@NotNull Call<News> call, @NotNull Throwable t) {
 
                 swipeRefreshLayout.setRefreshing(false);
 
@@ -126,19 +134,19 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
     }
 
 
-
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_seach:
-                SearchManager searchManager = (SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
-                final  SearchView searchView = (SearchView) item.getActionView();
+                SearchManager searchManager = (SearchManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SEARCH_SERVICE);
+                final SearchView searchView = (SearchView) item.getActionView();
+                assert searchManager != null;
                 searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-                searchView.setQueryHint("Search Lastest News...");
+                searchView.setQueryHint(QUERY_HINT);
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String s) {
-                        if(s.length() > 2){
+                        if (s.length() > 2) {
                             onLoadingSwipeRefresh(s);
                         }
                         return false;
@@ -146,11 +154,11 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
-                        onLoadingSwipeRefresh(newText); // alaways load when input text change
+                        onLoadingSwipeRefresh(newText); // always load when input text change
                         return false;
                     }
                 });
-                item.getIcon().setVisible(false,false);
+                item.getIcon().setVisible(false, false);
                 return true;
             case R.id.action_setting:
                 Toast.makeText(getActivity(), "Clear call log", Toast.LENGTH_SHORT).show();
@@ -159,7 +167,8 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
                 return super.onOptionsItemSelected(item);
         }
     }
-    private  void  onLoadingSwipeRefresh(final  String keyword){
+
+    private void onLoadingSwipeRefresh(final String keyword) {
         swipeRefreshLayout.post(
                 new Runnable() {
                     @Override
@@ -170,19 +179,19 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
         );
     }
 
-    private  void initListener(){
+    private void initListener() {
         newsAdapter.setItemOnclickListener(new OnItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
 
-                Intent intent = new Intent((Activity)getActivity(),DetailNewsActivity.class);
+                Intent intent = new Intent(getActivity(), DetailNewsActivity.class);
                 Article article = articles.get(position);
-                intent.putExtra("url",article.getUrl());
-                intent.putExtra("title",article.getTitle());
-                intent.putExtra("img",article.getUrlToImage());
-                intent.putExtra("date",article.getPublisedAt());
-                intent.putExtra("source",article.getSource().getName());
-                intent.putExtra("author",article.getAuthor());
+                intent.putExtra(EXTRA_URL, article.getUrl());
+                intent.putExtra(EXTRA_TITLE, article.getTitle());
+                intent.putExtra(EXTRA_IMG, article.getUrlToImage());
+                intent.putExtra(EXTRA_DATE, article.getPublishedAt());
+                intent.putExtra(EXTRA_SOURCE, article.getSource().getName());
+                intent.putExtra(EXTRA_AUTHOR, article.getAuthor());
                 startActivity(intent);
 
             }
@@ -190,7 +199,7 @@ public  static  final String API_KEY = "7c988e9136a0403e923f294a123f2995";
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
